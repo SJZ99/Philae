@@ -20,12 +20,23 @@ import java.util.Objects;
  * @version 1.0
  */
 public class Git {
+	/** default output file */
 	private static CrashTracker gitTracker = new CrashTracker("GitCrashLog.txt");
+	
+	/** Directory which command run in */
 	private Path directory;
+	
+	/** save remote node */
 	private ArrayList<String> node = new ArrayList<String>();
+	
+	/**
+	 * Constructor
+	 * @param directory
+	 */
 	public Git(Path directory) {
 		this.directory = directory;
 	}
+	
 	/**
 	 * run git add .
  	 * @param directory
@@ -33,6 +44,7 @@ public class Git {
 	public void gitAdd() {
 		runCommand("git", "add", ".");
 	}
+	
 	/**
 	 * run git commit -m "message"
 	 * @param directory
@@ -41,6 +53,7 @@ public class Git {
 	public void gitCommit(String message) {
 		runCommand("git", "commit", "-m", "\"" + message + "\"");
 	}
+	
 	/**
 	 * run git remote add "node" "connect"
 	 * @param directory
@@ -52,6 +65,7 @@ public class Git {
 			this.node.add(node);
 		}
 	}
+	
 	/**
 	 * run git push -u "node" master
 	 * @param node
@@ -62,6 +76,7 @@ public class Git {
 		}
 		
 	}
+	
 	/**
 	 * run shell command
 	 * @param directory
