@@ -1,6 +1,9 @@
 package main;
 
+import keyListner.KeyListner;
+import robotBase.Command;
 import robotBase.RobotBase;
+import robotBase.RobotState;
 /**
  * Major changes
  * @author YuYue
@@ -8,34 +11,39 @@ import robotBase.RobotBase;
  * 2020¦~7¤ë11¤é
  */
 public class Robot extends RobotBase{
-
+	RobotContainer container = new RobotContainer();
 	@Override
 	public void RobotInit() {
-		// TODO Auto-generated method stub
+		new Thread() {
+			KeyListner listner = new KeyListner();
+		}.start();
 		
 	}
-
 	@Override
 	public void autonomousInit() {
 		// TODO Auto-generated method stub
-		
+		RobotState.isInit = true;
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-		// TODO Auto-generated method stub
+		System.out.println("auto");
 		
 	}
 
 	@Override
 	public void teleopInit() {
-		// TODO Auto-generated method stub
+		System.out.println("teleopInit");
+		RobotState.isInit = true;
 		
 	}
 
 	@Override
 	public void teleopPeriodic() {
-		// TODO Auto-generated method stub
+		Command command = container.map.get(RobotState.getPressedChar());
+		if(command != null) {
+			command.start();
+		}
 		
 	}
 

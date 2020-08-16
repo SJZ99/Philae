@@ -30,14 +30,15 @@ public abstract class RobotBase {
 	 * Start Robot. Will be called at main.
 	 */
 	public final void start() {
+		RobotInit();
 		while(true) {
 			if(RobotState.mode == Mode.TELEOP) {
-				if(RobotState.isInit) {
+				if(!RobotState.isInit) {
 					teleopInit();
 				}
 				teleopPeriodic();
 			}else if(RobotState.mode == Mode.AUTONOMOUS) {
-				if(RobotState.isInit) {
+				if(!RobotState.isInit) {
 					autonomousInit();
 				}
 				autonomousPeriodic();
